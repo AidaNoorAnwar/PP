@@ -32,6 +32,7 @@ void wind_force(int N,double *f[Ndim], double *visc, double *pos[Ndim], double P
 void evolve(int count,double dt){
 int  step;
 int i,j,k,l;
+double tmp_f,tmp_w1,tmp_v,tmp_w2;
 
 /*
  * Loop over timesteps.
@@ -54,14 +55,16 @@ int i,j,k,l;
 	  add_norm(Nbody,r,pos[i]);
         }
         for(k=0;k<Nbody;k++){
-          r[k] = sqrt(r[k]);
+          r[k] = pow(r[k],1.5);
         }
        /* calculate central force */
         for(i=0;i<Nbody;i++){
+          tmp_w1=G_M*mass[i];
 	  for(l=0;l<Ndim;l++){
                 f[l][i] = f[l][i] - 
-                   force(G*mass[i]*M_central,pos[l][i],r[i]);
+                   force(tmp_w1,pos[l][i],r[i]);
 	  }
+	  
 	}
 /* calculate pairwise separation of particles */
         k = 0;
@@ -82,7 +85,7 @@ int i,j,k,l;
 	  add_norm(Npair,delta_r,delta_x[i]);
         }
         for(k=0;k<Npair;k++){
-          delta_r[k] = sqrt(delta_r[k]);
+          delta_r[k] = pow(delta_r[k],1.5);
         }
 
 /*
@@ -90,19 +93,18 @@ int i,j,k,l;
  */
         k = 0;
         for(i=0;i<Nbody;i++){
+          tmp_w1=G*mass[i];
           for(j=i+1;j<Nbody;j++){
+            tmp_w2=tmp_w1*mass[j];
             for(l=0;l<Ndim;l++){
 /*  flip force if close in */
+	      tmp_f=force(tmp_w2,delta_x[l][k],delta_r[k]);
               if( delta_r[k] >= Size ){
-                f[l][i] = f[l][i] - 
-                   force(G*mass[i]*mass[j],delta_x[l][k],delta_r[k]);
-                f[l][j] = f[l][j] + 
-                   force(G*mass[i]*mass[j],delta_x[l][k],delta_r[k]);
+                f[l][i] = f[l][i] - tmp_f;
+                f[l][j] = f[l][j] + tmp_f;
               }else{
-                f[l][i] = f[l][i] + 
-                   force(G*mass[i]*mass[j],delta_x[l][k],delta_r[k]);
-                f[l][j] = f[l][j] - 
-                   force(G*mass[i]*mass[j],delta_x[l][k],delta_r[k]);
+                f[l][i] = f[l][i] + tmp_f;
+                f[l][j] = f[l][j] - tmp_f;
 		collisions++;
               }
             }
@@ -119,8 +121,9 @@ int i,j,k,l;
 
 /* update velocities */
         for(i=0;i<Nbody;i++){
+          tmp_v = dt/mass[i];
           for(j=0;j<Ndim;j++){
-            vel[j][i] = vel[j][i] + dt * (f[j][i]/mass[i]);
+            vel[j][i] = vel[j][i] + tmp_v*f[j][i];
           }
         }
 

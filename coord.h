@@ -35,5 +35,6 @@ DEF int collisions;
 #define Size 1.0
 #define G 2.0
 #define M_central 1000.0
+#define G_M G*M_central
 
 void evolve(int Nstep, double dt);

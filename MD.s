@@ -1,7 +1,7 @@
 	.file	"MD.c"
 	.version	"01.01"
 ## PGC 12.8 -opt 1
-## PGC 04/03/2014  23:54:41
+## PGC 04/03/2014  23:52:34
 ## pgcc MD.c -S -c
 ## /opt/pgi/linux86-64/12.8/bin/pgc
 ## MD.c -opt 1 -terse 1 -inform warn -x 119 0xa10000 -x 122 0x40 -x 123 0x1000
@@ -35,42 +35,42 @@ evolve:
 ..Dcfi0:
 	movq	%rsp, %rbp
 ..Dcfi1:
-	subq	$64, %rsp
-	movq	%rbx, -24(%rbp)
-	movq	%r12, -32(%rbp)
-	movq	%r13, -40(%rbp)
-	movq	%r14, -48(%rbp)
-	movq	%r15, -56(%rbp)
-	movl	%edi, -12(%rbp)
-	vmovsd	%xmm0, -8(%rbp)
+	subq	$96, %rsp
+	movq	%rbx, -56(%rbp)
+	movq	%r12, -64(%rbp)
+	movq	%r13, -72(%rbp)
+	movq	%r14, -80(%rbp)
+	movq	%r15, -88(%rbp)
+	movl	%edi, -44(%rbp)
+	vmovsd	%xmm0, -16(%rbp)
 ..EN1:
-##  lineno: 39
+##  lineno: 40
 ..LN2:
 	movl	$1, %ebx
 	.p2align	4,,3
-.LB1184:
-	cmpl	-12(%rbp), %ebx
-	jg	.LB1185
-##  lineno: 40
+.LB1188:
+	cmpl	-44(%rbp), %ebx
+	jg	.LB1189
+##  lineno: 41
 ..LN3:
 	xorl	%eax, %eax
-	movl	$.S01187, %edi
+	movl	$.S01191, %edi
 	movl	%ebx, %esi
 	vzeroupper
 	call	printf
 	xorl	%eax, %eax
-	movl	$.S01190, %edi
+	movl	$.S01194, %edi
 	movl	collisions(%rip), %esi
 	vzeroupper
 	call	printf
 	xorl	%r12d, %r12d
 	.p2align	4,,3
-.LB1192:
-##  lineno: 44
+.LB1196:
+##  lineno: 45
 ..LN4:
 	cmpl	$3, %r12d
-	jge	.LB1193
-##  lineno: 45
+	jge	.LB1197
+##  lineno: 46
 ..LN5:
 	movslq	%r12d, %rax
 	movl	$4096, %edi
@@ -80,10 +80,10 @@ evolve:
 	vzeroupper
 	call	visc_force
 	addl	$1, %r12d
-	jmp	.LB1192
+	jmp	.LB1196
 	.p2align	4,,3
-.LB1193:
-##  lineno: 46
+.LB1197:
+##  lineno: 47
 ..LN6:
 	movl	$4096, %edi
 	movl	$f, %esi
@@ -94,28 +94,28 @@ evolve:
 	call	wind_force
 	xorl	%r13d, %r13d
 	.align	8
-.LB1196:
-##  lineno: 50
+.LB1200:
+##  lineno: 51
 ..LN7:
 	cmpl	$4096, %r13d
-	jge	.LB1197
+	jge	.LB1201
 	movslq	%r13d, %rax
 	movq	r(%rip), %rcx
 	movq	$0, (%rcx,%rax,8)
 	addl	$1, %r13d
-	jmp	.LB1196
+	jmp	.LB1200
 	.p2align	4,,3
-.LB1197:
-##  lineno: 52
+.LB1201:
+##  lineno: 53
 ..LN8:
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1199:
-##  lineno: 53
+.LB1203:
+##  lineno: 54
 ..LN9:
 	cmpl	$3, %r14d
-	jge	.LB1200
-##  lineno: 54
+	jge	.LB1204
+##  lineno: 55
 ..LN10:
 	movslq	%r14d, %rax
 	movl	$4096, %edi
@@ -124,52 +124,55 @@ evolve:
 	vzeroupper
 	call	add_norm
 	addl	$1, %r14d
-	jmp	.LB1199
+	jmp	.LB1203
 	.p2align	4,,3
-.LB1200:
-##  lineno: 55
+.LB1204:
+##  lineno: 56
 ..LN11:
 	xorl	%r13d, %r13d
 	.align	8
-.LB1202:
-##  lineno: 56
+.LB1206:
+##  lineno: 57
 ..LN12:
 	cmpl	$4096, %r13d
-	jge	.LB1203
+	jge	.LB1207
 	movslq	%r13d, %rax
 	movq	r(%rip), %rcx
 	vsqrtsd	(%rcx,%rax,8), %xmm0, %xmm0
+	vmulsd	(%rcx,%rax,8), %xmm0, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
 	addl	$1, %r13d
-	jmp	.LB1202
+	jmp	.LB1206
 	.p2align	4,,3
-.LB1203:
-##  lineno: 58
+.LB1207:
+##  lineno: 59
 ..LN13:
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1205:
-##  lineno: 60
+.LB1210:
+##  lineno: 61
 ..LN14:
 	cmpl	$4096, %r14d
-	jge	.LB1206
-	xorl	%r15d, %r15d
-	.p2align	4,,3
-.LB1208:
-##  lineno: 61
-..LN15:
-	cmpl	$3, %r15d
-	jge	.LB1209
-##  lineno: 63
-..LN16:
+	jge	.LB1211
 	movslq	%r14d, %rax
 	movq	mass(%rip), %rcx
 	vmovsd	(%rcx,%rax,8), %xmm0
-	vaddsd	%xmm0, %xmm0, %xmm0
-	vmulsd	.C01211(%rip), %xmm0, %xmm0
+	vmulsd	.C01214(%rip), %xmm0, %xmm0
+	vmovsd	%xmm0, -40(%rbp)
+	xorl	%r15d, %r15d
+	.p2align	4,,3
+.LB1215:
+##  lineno: 63
+..LN15:
+	cmpl	$3, %r15d
+	jge	.LB1216
+##  lineno: 65
+..LN16:
+	movslq	%r14d, %rax
 	movslq	%r15d, %rcx
 	movq	pos(,%rcx,8), %rcx
 	movq	r(%rip), %rdx
+	vmovsd	-40(%rbp), %xmm0
 	vmovsd	(%rcx,%rax,8), %xmm1
 	vmovsd	(%rdx,%rax,8), %xmm2
 	vzeroupper
@@ -181,39 +184,39 @@ evolve:
 	vsubsd	%xmm0, %xmm1, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
 	addl	$1, %r15d
-	jmp	.LB1208
+	jmp	.LB1215
 	.p2align	4,,3
-.LB1209:
-##  lineno: 64
+.LB1216:
+##  lineno: 66
 ..LN17:
 	addl	$1, %r14d
-	jmp	.LB1205
+	jmp	.LB1210
 	.p2align	4,,3
-.LB1206:
-##  lineno: 65
+.LB1211:
+##  lineno: 68
 ..LN18:
 	xorl	%r13d, %r13d
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1212:
-##  lineno: 68
+.LB1218:
+##  lineno: 71
 ..LN19:
 	cmpl	$4096, %r14d
-	jge	.LB1213
+	jge	.LB1219
 	leal	1(%r14), %r12d
 	.p2align	4,,3
-.LB1215:
-##  lineno: 69
+.LB1221:
+##  lineno: 72
 ..LN20:
 	cmpl	$4096, %r12d
-	jge	.LB1216
+	jge	.LB1222
 	xorl	%r15d, %r15d
 	.align	8
-.LB1218:
-##  lineno: 70
+.LB1224:
+##  lineno: 73
 ..LN21:
 	cmpl	$3, %r15d
-	jge	.LB1219
+	jge	.LB1225
 	movslq	%r14d, %rax
 	movslq	%r15d, %rcx
 	movq	pos(,%rcx,8), %rdx
@@ -224,48 +227,48 @@ evolve:
 	movslq	%r13d, %rcx
 	vmovsd	%xmm0, (%rax,%rcx,8)
 	addl	$1, %r15d
-	jmp	.LB1218
+	jmp	.LB1224
 	.p2align	4,,3
-.LB1219:
-##  lineno: 72
+.LB1225:
+##  lineno: 75
 ..LN22:
 	addl	$1, %r13d
 	addl	$1, %r12d
-	jmp	.LB1215
+	jmp	.LB1221
 	.p2align	4,,3
-.LB1216:
-##  lineno: 74
+.LB1222:
+##  lineno: 77
 ..LN23:
 	addl	$1, %r14d
-	jmp	.LB1212
+	jmp	.LB1218
 	.p2align	4,,3
-.LB1213:
-##  lineno: 75
+.LB1219:
+##  lineno: 78
 ..LN24:
 	xorl	%r13d, %r13d
 	.align	8
-.LB1221:
-##  lineno: 78
+.LB1227:
+##  lineno: 81
 ..LN25:
 	cmpl	$8386560, %r13d
-	jge	.LB1223
+	jge	.LB1229
 	movslq	%r13d, %rax
 	movq	delta_r(%rip), %rcx
 	movq	$0, (%rcx,%rax,8)
 	addl	$1, %r13d
-	jmp	.LB1221
+	jmp	.LB1227
 	.p2align	4,,3
-.LB1223:
-##  lineno: 80
+.LB1229:
+##  lineno: 83
 ..LN26:
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1225:
-##  lineno: 81
+.LB1231:
+##  lineno: 84
 ..LN27:
 	cmpl	$3, %r14d
-	jge	.LB1226
-##  lineno: 82
+	jge	.LB1232
+##  lineno: 85
 ..LN28:
 	movslq	%r14d, %rax
 	movl	$8386560, %edi
@@ -274,173 +277,143 @@ evolve:
 	vzeroupper
 	call	add_norm
 	addl	$1, %r14d
-	jmp	.LB1225
+	jmp	.LB1231
 	.p2align	4,,3
-.LB1226:
-##  lineno: 83
+.LB1232:
+##  lineno: 86
 ..LN29:
 	xorl	%r13d, %r13d
 	.align	8
-.LB1228:
-##  lineno: 84
+.LB1234:
+##  lineno: 87
 ..LN30:
 	cmpl	$8386560, %r13d
-	jge	.LB1229
+	jge	.LB1235
 	movslq	%r13d, %rax
 	movq	delta_r(%rip), %rcx
 	vsqrtsd	(%rcx,%rax,8), %xmm0, %xmm0
+	vmulsd	(%rcx,%rax,8), %xmm0, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
 	addl	$1, %r13d
-	jmp	.LB1228
+	jmp	.LB1234
 	.p2align	4,,3
-.LB1229:
-##  lineno: 86
+.LB1235:
+##  lineno: 89
 ..LN31:
 	xorl	%r13d, %r13d
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1231:
-##  lineno: 92
+.LB1237:
+##  lineno: 95
 ..LN32:
-	cmpl	$4096, %r14d
-	jge	.LB1232
-	leal	1(%r14), %r12d
+	movl	%r14d, %eax
+	cmpl	$4096, %eax
+	jge	.LB1238
+	movslq	%eax, %rcx
+	movq	mass(%rip), %rdx
+	vmovsd	(%rdx,%rcx,8), %xmm0
+	vaddsd	%xmm0, %xmm0, %xmm0
+	vmovsd	%xmm0, -40(%rbp)
+	addl	$1, %eax
+	movl	%eax, %r12d
 	.p2align	4,,3
-.LB1234:
-##  lineno: 93
+.LB1240:
+##  lineno: 97
 ..LN33:
 	cmpl	$4096, %r12d
-	jge	.LB1235
+	jge	.LB1241
+	vmovsd	-40(%rbp), %xmm0
+	movslq	%r12d, %rax
+	movq	mass(%rip), %rcx
+	vmulsd	(%rcx,%rax,8), %xmm0, %xmm0
+	vmovsd	%xmm0, -32(%rbp)
 	xorl	%r15d, %r15d
 	.p2align	4,,3
-.LB1237:
-##  lineno: 94
+.LB1243:
+##  lineno: 99
 ..LN34:
 	cmpl	$3, %r15d
-	jge	.LB1238
-	movslq	%r13d, %rax
-	movq	delta_r(%rip), %rcx
-	vmovsd	(%rcx,%rax,8), %xmm0
-	vucomisd	.C00098(%rip), %xmm0
-	jb	.LB1240
-##  lineno: 98
+	jge	.LB1244
+##  lineno: 101
 ..LN35:
-	movslq	%r14d, %rax
-	movq	mass(%rip), %rcx
-	vmovsd	(%rcx,%rax,8), %xmm0
-	vaddsd	%xmm0, %xmm0, %xmm0
-	movslq	%r12d, %rax
-	vmulsd	(%rcx,%rax,8), %xmm0, %xmm0
 	movslq	%r13d, %rax
 	movslq	%r15d, %rcx
 	movq	delta_x(,%rcx,8), %rcx
 	movq	delta_r(%rip), %rdx
+	vmovsd	-32(%rbp), %xmm0
 	vmovsd	(%rcx,%rax,8), %xmm1
 	vmovsd	(%rdx,%rax,8), %xmm2
 	vzeroupper
 	call	force
+	vmovsd	%xmm0, -24(%rbp)
+	movslq	%r13d, %rax
+	movq	delta_r(%rip), %rcx
+	vmovsd	(%rcx,%rax,8), %xmm1
+	vucomisd	.C00098(%rip), %xmm1
+	jb	.LB1246
 	movslq	%r14d, %rax
 	movslq	%r15d, %rcx
 	movq	f(,%rcx,8), %rdx
 	vmovsd	(%rdx,%rax,8), %xmm1
-	vsubsd	%xmm0, %xmm1, %xmm0
-	vmovsd	%xmm0, (%rdx,%rax,8)
-	movq	mass(%rip), %rdx
-	vmovsd	(%rdx,%rax,8), %xmm0
-	vaddsd	%xmm0, %xmm0, %xmm0
+	vsubsd	%xmm0, %xmm1, %xmm1
+	vmovsd	%xmm1, (%rdx,%rax,8)
 	movslq	%r12d, %rax
-	vmulsd	(%rdx,%rax,8), %xmm0, %xmm0
-	movslq	%r13d, %rax
-	movq	delta_x(,%rcx,8), %rcx
-	movq	delta_r(%rip), %rdx
-	vmovsd	(%rcx,%rax,8), %xmm1
-	vmovsd	(%rdx,%rax,8), %xmm2
-	vzeroupper
-	call	force
-	movslq	%r12d, %rax
-	movslq	%r15d, %rcx
 	movq	f(,%rcx,8), %rcx
 	vaddsd	(%rcx,%rax,8), %xmm0, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
-	jmp	.LB1242
+	jmp	.LB1248
 	.p2align	4,,3
-.LB1240:
-##  lineno: 103
+.LB1246:
+##  lineno: 106
 ..LN36:
-	movslq	%r14d, %rax
-	movq	mass(%rip), %rcx
-	vmovsd	(%rcx,%rax,8), %xmm0
-	vaddsd	%xmm0, %xmm0, %xmm0
-	movslq	%r12d, %rax
-	vmulsd	(%rcx,%rax,8), %xmm0, %xmm0
-	movslq	%r13d, %rax
-	movslq	%r15d, %rcx
-	movq	delta_x(,%rcx,8), %rcx
-	movq	delta_r(%rip), %rdx
-	vmovsd	(%rcx,%rax,8), %xmm1
-	vmovsd	(%rdx,%rax,8), %xmm2
-	vzeroupper
-	call	force
+	vmovsd	-24(%rbp), %xmm0
 	movslq	%r14d, %rax
 	movslq	%r15d, %rcx
 	movq	f(,%rcx,8), %rdx
-	vaddsd	(%rdx,%rax,8), %xmm0, %xmm0
-	vmovsd	%xmm0, (%rdx,%rax,8)
-	movq	mass(%rip), %rdx
-	vmovsd	(%rdx,%rax,8), %xmm0
-	vaddsd	%xmm0, %xmm0, %xmm0
+	vaddsd	(%rdx,%rax,8), %xmm0, %xmm1
+	vmovsd	%xmm1, (%rdx,%rax,8)
 	movslq	%r12d, %rax
-	vmulsd	(%rdx,%rax,8), %xmm0, %xmm0
-	movslq	%r13d, %rax
-	movq	delta_x(,%rcx,8), %rcx
-	movq	delta_r(%rip), %rdx
-	vmovsd	(%rcx,%rax,8), %xmm1
-	vmovsd	(%rdx,%rax,8), %xmm2
-	vzeroupper
-	call	force
-	movslq	%r12d, %rax
-	movslq	%r15d, %rcx
 	movq	f(,%rcx,8), %rcx
 	vmovsd	(%rcx,%rax,8), %xmm1
 	vsubsd	%xmm0, %xmm1, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
 	addl	$1, collisions(%rip)
 	.p2align	4,,3
-.LB1242:
-##  lineno: 108
+.LB1248:
+##  lineno: 110
 ..LN37:
 	addl	$1, %r15d
+	jmp	.LB1243
+	.p2align	4,,3
+.LB1244:
+	addl	$1, %r13d
+	addl	$1, %r12d
+	jmp	.LB1240
+	.p2align	4,,3
+.LB1241:
+##  lineno: 112
+..LN38:
+	addl	$1, %r14d
 	jmp	.LB1237
 	.p2align	4,,3
 .LB1238:
-	addl	$1, %r13d
-	addl	$1, %r12d
-	jmp	.LB1234
-	.p2align	4,,3
-.LB1235:
-##  lineno: 110
-..LN38:
-	addl	$1, %r14d
-	jmp	.LB1231
-	.p2align	4,,3
-.LB1232:
-##  lineno: 111
+##  lineno: 113
 ..LN39:
 	xorl	%r14d, %r14d
 	.p2align	4,,3
-.LB1244:
-##  lineno: 114
+.LB1250:
+##  lineno: 116
 ..LN40:
 	cmpl	$4096, %r14d
-	jge	.LB1245
+	jge	.LB1251
 	xorl	%r12d, %r12d
 	.align	8
-.LB1247:
-##  lineno: 115
+.LB1253:
+##  lineno: 117
 ..LN41:
 	cmpl	$3, %r12d
-	jge	.LB1248
-	vmovsd	-8(%rbp), %xmm0
+	jge	.LB1254
+	vmovsd	-16(%rbp), %xmm0
 	movslq	%r14d, %rax
 	movslq	%r12d, %rcx
 	movq	vel(,%rcx,8), %rdx
@@ -449,64 +422,67 @@ evolve:
 	vaddsd	(%rcx,%rax,8), %xmm0, %xmm0
 	vmovsd	%xmm0, (%rcx,%rax,8)
 	addl	$1, %r12d
-	jmp	.LB1247
-	.p2align	4,,3
-.LB1248:
-##  lineno: 117
-..LN42:
-	addl	$1, %r14d
-	jmp	.LB1244
-	.p2align	4,,3
-.LB1245:
-##  lineno: 118
-..LN43:
-	xorl	%r14d, %r14d
-	.p2align	4,,3
-.LB1250:
-##  lineno: 121
-..LN44:
-	cmpl	$4096, %r14d
-	jge	.LB1251
-	xorl	%r12d, %r12d
-	.align	8
-.LB1253:
-##  lineno: 122
-..LN45:
-	cmpl	$3, %r12d
-	jge	.LB1254
-	movslq	%r14d, %rax
-	movslq	%r12d, %rcx
-	movq	f(,%rcx,8), %rdx
-	vmovsd	(%rdx,%rax,8), %xmm0
-	movq	mass(%rip), %rdx
-	vdivsd	(%rdx,%rax,8), %xmm0, %xmm0
-	vmulsd	-8(%rbp), %xmm0, %xmm0
-	movq	vel(,%rcx,8), %rcx
-	vaddsd	(%rcx,%rax,8), %xmm0, %xmm0
-	vmovsd	%xmm0, (%rcx,%rax,8)
-	addl	$1, %r12d
 	jmp	.LB1253
 	.p2align	4,,3
 .LB1254:
-##  lineno: 124
-..LN46:
+##  lineno: 119
+..LN42:
 	addl	$1, %r14d
 	jmp	.LB1250
 	.p2align	4,,3
 .LB1251:
+##  lineno: 120
+..LN43:
+	xorl	%r14d, %r14d
+	.p2align	4,,3
+.LB1256:
+##  lineno: 123
+..LN44:
+	cmpl	$4096, %r14d
+	jge	.LB1257
+	vmovsd	-16(%rbp), %xmm0
+	movslq	%r14d, %rax
+	movq	mass(%rip), %rcx
+	vdivsd	(%rcx,%rax,8), %xmm0, %xmm0
+	vmovsd	%xmm0, -8(%rbp)
+	xorl	%r12d, %r12d
+	.align	8
+.LB1259:
 ##  lineno: 125
+..LN45:
+	cmpl	$3, %r12d
+	jge	.LB1260
+	vmovsd	-8(%rbp), %xmm0
+	movslq	%r14d, %rax
+	movslq	%r12d, %rcx
+	movq	f(,%rcx,8), %rdx
+	vmulsd	(%rdx,%rax,8), %xmm0, %xmm0
+	movq	vel(,%rcx,8), %rcx
+	vaddsd	(%rcx,%rax,8), %xmm0, %xmm0
+	vmovsd	%xmm0, (%rcx,%rax,8)
+	addl	$1, %r12d
+	jmp	.LB1259
+	.p2align	4,,3
+.LB1260:
+##  lineno: 127
+..LN46:
+	addl	$1, %r14d
+	jmp	.LB1256
+	.p2align	4,,3
+.LB1257:
+##  lineno: 128
 ..LN47:
 	addl	$1, %ebx
-	jmp	.LB1184
+	jmp	.LB1188
 	.p2align	4,,3
-.LB1185:
-##  lineno: 128
+.LB1189:
+##  lineno: 131
 ..LN48:
-	movq	-56(%rbp), %r15
-	movq	-48(%rbp), %r14
-	movq	-40(%rbp), %r13
-	movq	-32(%rbp), %r12
-	movq	-24(%rbp), %rbx
+	movq	-88(%rbp), %r15
+	movq	-80(%rbp), %r14
+	movq	-72(%rbp), %r13
+	movq	-64(%rbp), %r12
+	movq	-56(%rbp), %rbx
 	leave
 	vzeroupper
 	ret
@@ -517,17 +493,17 @@ evolve:
 __evolveEND:
 	.text
 	.align	8
-.C01211:
-	.long	0x0, 0x408f4000	##  1.00000000000000000E+3
+.C01214:
+	.long	0x0, 0x409f4000	##  2.00000000000000000E+3
 .C00098:
 	.long	0x0, 0x3ff00000	##  1.00000000000000000E+0
 	.section	.rodata
 	.align	1
-.S01187:
+.S01191:
 ## "timestep %d\n"
 	.byte	0x74,0x69,0x6d,0x65,0x73,0x74,0x65,0x70,0x20,0x25,0x64
 	.byte	0x0a,0x00
-.S01190:
+.S01194:
 ## "collisions %d\n"
 	.byte	0x63,0x6f,0x6c,0x6c,0x69,0x73,0x69,0x6f,0x6e,0x73,0x20
 	.byte	0x25,0x64,0x0a,0x00
@@ -550,7 +526,7 @@ __evolveEND:
 	.byte	0x8
 	.byte	0x1
 	.string	"MD.c"
-	.string	"/phys/linux/s1340401/Sem2/PP/MD/C2/1"
+	.string	"/phys/linux/s1340401/Sem2/PP/MD/C2/7"
 	.string	"PGC 12.8-0"
 	.byte	0x2
 	.quad	..text.b
@@ -643,7 +619,7 @@ __evolveEND:
 	.quad	..LN2
 	.byte	0x4
 	.byte	0x1
-	.byte	0x1b
+	.byte	0x1c
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
@@ -734,7 +710,7 @@ __evolveEND:
 	.quad	..LN15
 	.byte	0x4
 	.byte	0x1
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
@@ -755,7 +731,7 @@ __evolveEND:
 	.quad	..LN18
 	.byte	0x4
 	.byte	0x1
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
@@ -860,21 +836,21 @@ __evolveEND:
 	.quad	..LN33
 	.byte	0x4
 	.byte	0x1
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
 	.quad	..LN34
 	.byte	0x4
 	.byte	0x1
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
 	.quad	..LN35
 	.byte	0x4
 	.byte	0x1
-	.byte	0x18
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
@@ -888,7 +864,7 @@ __evolveEND:
 	.quad	..LN37
 	.byte	0x4
 	.byte	0x1
-	.byte	0x19
+	.byte	0x18
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
@@ -944,7 +920,7 @@ __evolveEND:
 	.quad	..LN45
 	.byte	0x4
 	.byte	0x1
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x9
 	.byte	0x2
